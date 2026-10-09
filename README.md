@@ -1,133 +1,222 @@
-# IBM Employee Attrition Prediction
+# Employee Attrition Prediction
 
-## 📌 Project Overview
+> Predicting employee attrition using Machine Learning to help organizations identify employees who may be at risk of leaving.
 
-Employee attrition refers to employees leaving an organization. High employee attrition can increase recruitment costs, reduce productivity, and affect overall business performance.
+[🚀 Live Streamlit App](https://employee-attrition-ui.onrender.com) · [💻 GitHub Repository](https://github.com/shiyachandrawanshi1-dev/Employee-Attrition-Prediction)
 
-This project uses Machine Learning to predict whether an employee is likely to leave an organization based on employee-related information.
+---
 
-The goal is to help organizations understand attrition patterns and support data-driven HR decisions.
+## 🎯 Business Problem
 
-## 🎯 Project Objectives
+Employee attrition can increase recruitment and training costs, disrupt teams, and result in the loss of valuable experience.
 
-* Analyze employee data to understand attrition patterns.
-* Prepare and process data for Machine Learning.
-* Train and use a Machine Learning model for attrition prediction.
-* Provide predictions through a Python application.
-* Explore how data analytics and predictive modeling can support HR decision-making.
+This project uses Machine Learning to predict whether an employee is likely to leave a company based on factors such as age, monthly income, job satisfaction, work-life balance, and years at the company.
 
-## 🛠️ Technologies Used
+**Goal:** Help HR teams identify potential attrition risks and make more informed employee-retention decisions.
 
-* **Python** – Core programming language
-* **Pandas** – Data manipulation and analysis
-* **NumPy** – Numerical operations
-* **Scikit-learn** – Machine Learning model development
-* **Joblib** – Saving and loading the trained model
-* **Flask** – API development
-* **Streamlit** – Interactive user interface
-* **Jupyter Notebook** – Data analysis and model experimentation
+**Target audience:** HR teams, people analytics teams, and business managers.
+
+---
+
+## 📊 Dataset
+
+* **Source:** IBM HR Analytics Employee Attrition Dataset
+* **Dataset file:** `IBM.csv`
+* **Target variable:** `Attrition`
+* **Prediction classes:** Yes / No
+* **Data processing:** Data cleaning, feature engineering, and categorical-variable encoding
+
+The dataset contains employee information used to explore patterns associated with employees leaving an organization.
+
+---
+
+## 🔍 Exploratory Data Analysis (EDA)
+
+The project explores relationships between employee attrition and several factors, including:
+
+* 💰 Monthly income and compensation
+* 🧑 Age and career stage
+* 📍 Distance from home
+* 😔 Job and environmental satisfaction
+* 🏢 Years at the company and previous companies worked
+* 💍 Marital status
+* 🏬 Department and education field
+* ⚖️ Class imbalance between employees who stayed and employees who left
+
+Visualizations help identify patterns and compare attrition rates across employee groups.
+
+---
+
+## ⚙️ Feature Engineering
+
+Two additional features were created to capture potentially useful relationships in the data.
+
+**1. IncomePerYear**
+
+`IncomePerYear = MonthlyIncome / Age`
+
+This feature represents monthly income relative to age. It is an engineered ratio, not a direct measure of employee dissatisfaction.
+
+**2. SatisfactionScore**
+
+`SatisfactionScore = (JobSatisfaction + EnvironmentSatisfaction + WorkLifeBalance) / 3`
+
+This feature combines three employee-experience indicators into one average score.
+
+These features are used alongside the original employee attributes during prediction.
+
+---
+
+## 🤖 Machine Learning Model
+
+The project uses **Logistic Regression** to predict employee attrition as a binary classification problem.
+
+### Why Logistic Regression?
+
+* Suitable for binary classification.
+* Estimates the probability of an employee leaving.
+* Relatively efficient to train and evaluate.
+* Provides a useful baseline for comparing classification models.
+
+The model uses employee features to estimate attrition risk and generate a prediction.
+
+### Model Evaluation
+
+Model performance should be evaluated using metrics suited to the imbalanced target variable:
+
+* **Recall:** How many employees who actually left were identified.
+* **Precision:** How many employees flagged as at risk actually left.
+* **F1-score:** A balance between precision and recall.
+* **Accuracy:** The proportion of all predictions that were correct.
+
+Recall is particularly relevant when missing an employee at risk of leaving is considered costly. However, a high recall can also generate more false positives, so the threshold should be chosen based on the organization's needs.
+
+*See the project notebook for the actual evaluation results and model comparisons.*
+
+---
+
+## 🚀 Live Application
+
+Try the deployed application:
+
+### [Open Employee Attrition Prediction App](https://employee-attrition-ui.onrender.com)
+
+The application provides an interface to:
+
+* Enter employee details.
+* Generate an attrition prediction.
+* View the model's estimated prediction probability.
+* Explore potential attrition risk based on the supplied details.
+
+**Note:** Predictions are estimates from a machine learning model and should support—not replace—human judgment in HR decisions.
+
+---
+
+## 🛠️ Tech Stack
+
+| Category             | Technologies                      |
+| -------------------- | --------------------------------- |
+| Programming Language | Python                            |
+| Data Analysis        | Pandas, NumPy                     |
+| Machine Learning     | Scikit-learn, Logistic Regression |
+| Data Visualization   | Matplotlib, Seaborn               |
+| Model Serialization  | Joblib                            |
+| API Development      | Flask                             |
+| Web Interface        | Streamlit                         |
+| Deployment           | Render                            |
+| Version Control      | Git, GitHub                       |
+
+---
 
 ## 📂 Project Structure
 
 ```text
 Employee-Attrition-Prediction/
 │
-├── Employee_Attrition_API/
-│   ├── app.py
-│   ├── final_model.pkl
-│   └── requirements.txt
-│
-├── IBM_Attrition_prediction.ipynb
 ├── IBM.csv
+├── IBM_Attrition_prediction.ipynb
 ├── final_model.pkl
+├── README.md
 ├── .gitignore
-└── README.md
+│
+└── Employee_Attrition_API/
+    ├── app.py
+    ├── final_model.pkl
+    └── requirements.txt
 ```
 
-## 📊 Dataset
+---
 
-The project uses an IBM employee dataset containing employee-related attributes that can be analyzed to identify patterns associated with attrition.
+## 💻 Run the Project Locally
 
-The dataset is used for data exploration, preprocessing, and Machine Learning.
-
-## ⚙️ Project Workflow
-
-1. **Data Collection:** Load the employee dataset.
-2. **Exploratory Data Analysis:** Explore the dataset and identify patterns related to attrition.
-3. **Data Preprocessing:** Prepare the data for model training.
-4. **Model Training:** Train a Machine Learning model using the processed data.
-5. **Model Saving:** Save the trained model for later use.
-6. **Prediction:** Use employee information to generate attrition predictions.
-7. **Application:** Provide an interface and API using the application's Flask and Streamlit components.
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-Make sure Python and Git are installed on your computer.
-
-### 1. Clone the repository
+**1. Clone the repository**
 
 ```bash
 git clone https://github.com/shiyachandrawanshi1-dev/Employee-Attrition-Prediction.git
 ```
 
-### 2. Navigate to the application folder
+**2. Navigate to the application folder**
 
 ```bash
 cd Employee-Attrition-Prediction/Employee_Attrition_API
 ```
 
-### 3. Create a virtual environment (recommended)
+**3. Create and activate a virtual environment**
 
 ```bash
 python -m venv venv
 ```
 
-Activate it on Windows:
+Windows:
 
 ```bash
 venv\Scripts\activate
 ```
 
-### 4. Install dependencies
+**4. Install the dependencies**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 5. Run the application
-
-The application entry point is `app.py`. Run it using the command appropriate to the current Flask and Streamlit setup.
-
-For a Streamlit entry point, the typical command is:
+**5. Run the Streamlit application**
 
 ```bash
 streamlit run app.py
 ```
 
-Make sure the Flask API is started and configured as required by the application code.
-
-## 💡 Expected Outcome
-
-The application is intended to predict employee attrition based on the information provided and demonstrate how Machine Learning can be applied to HR analytics.
-
-Predictions are estimates and should not be treated as definitive judgments about individual employees.
+---
 
 ## 🔮 Future Improvements
 
-* Improve model performance through feature engineering and model evaluation.
-* Add more interactive visualizations.
-* Deploy the application online.
-* Improve API integration and error handling.
-* Add further insights into employee attrition patterns.
+* Add SHAP-based explanations for individual predictions.
+* Compare additional models, such as Random Forest and XGBoost.
+* Improve performance on the minority attrition class.
+* Build a department-level attrition analytics dashboard.
+* Add model monitoring and periodic retraining.
+* Improve threshold selection based on business costs.
+
+---
+
+## 💡 Key Learnings
+
+1. Exploratory Data Analysis helps uncover patterns in employee data.
+2. Feature engineering can introduce additional signals for a predictive model.
+3. Accuracy alone can be misleading when the target classes are imbalanced.
+4. Recall and precision help evaluate the trade-offs in attrition prediction.
+5. Model and library versions must be compatible when deploying saved machine learning models.
+6. Deploying with Flask and Streamlit provides experience with APIs and interactive machine learning applications.
+
+---
 
 ## 👩‍💻 Author
 
 **Shiya Chandrawanshi**
 
-GitHub: [shiyachandrawanshi1-dev](https://github.com/shiyachandrawanshi1-dev)
+B.Tech Computer Science and Engineering
+
+[GitHub](https://github.com/shiyachandrawanshi1-dev)
 
 ---
 
-⭐ If you find this project interesting, feel free to explore the repository!
+⭐ If you find this project useful, consider giving the repository a star!
